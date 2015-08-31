@@ -1,0 +1,24 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file               @controllers.Assets.at(path="/public", file)
+
+# Home page
+GET         /                           @controllers.PageController.index()
+GET         /auth/*file                 @controllers.PageController.sign(file)
+
+# API
+GET         /api/auth/captcha           @controllers.api.Auths.createCaptcha()
+POST        /api/auth/signup            @controllers.api.Auths.signUp()
+POST        /api/auth/signin            @controllers.api.Auths.signIn()
+POST        /api/auth/signout           @controllers.api.Auths.signOut()
+
+#######################################################################
+# 社交账号
+#######################################################################
+GET         /oauth/authorization        @controllers.OAuths.authorization(social, state)
+GET         /oauth/qq                   @controllers.OAuths.qq()
+GET         /oauth/weibo                @controllers.OAuths.weibo()
+GET         /oauth/weibo/cancel         @controllers.OAuths.weiboCancel()
