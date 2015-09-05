@@ -18,8 +18,9 @@ class Schemas() {
 
   def tTopicComment = TableQuery[TableTopicComment]
 
-  def tableSchemas = tCredential.schema ++
-    tUser.schema ++
-    tTopic.schema ++
-    tTopicComment.schema
+  def tableSchemas =
+    tCredential.schema ++
+      tUser.schema ++
+      tTopic.schema ++
+      tTopicComment.schema
 }

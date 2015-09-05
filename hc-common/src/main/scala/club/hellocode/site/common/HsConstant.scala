@@ -5,7 +5,7 @@ import java.nio.charset.Charset
 import org.bson.types.ObjectId
 
 object HsConstant {
-  final val CONFIG_DB = "helloscala.db"
+  final val CONFIG_DB = "hellocode.db"
   final val OID_LENGTH = ObjectId.get().toString.length
   final val SALT_SIZE = 16
   final val UTF8 = Charset.forName("UTF-8")

@@ -3,9 +3,9 @@ var del = require('del'),
     gulp = require('gulp'),
     concat = require('gulp-concat');
 
-var DEV_DOMAIN = 'www.helloscala.test',
-    TEST_DOMAIN = 'test.helloscala.test',
-    PROD_DOMAIN = 'www.helloscala.com';
+var DEV_DOMAIN = 'www.hellocode.test',
+    TEST_DOMAIN = 'test.hellocode.club',
+    PROD_DOMAIN = 'www.hellocode.club';
 
 if (argv.prod || argv.test) {
     process.env.NODE_ENV = 'production';
@@ -23,5 +23,5 @@ gulp.task('watch:vendor', function () {
     gulp.watch('./src/vendor/**/*', ['build:vendor;all']);
 });
 
-
 gulp.task('build', ['build:vendor']);
+

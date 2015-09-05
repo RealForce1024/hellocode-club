@@ -10,7 +10,7 @@ import org.apache.commons.codec.binary.Hex
 import org.bouncycastle.jce.provider.BouncyCastleProvider
 
 class TripleDesUtils {
-  private val key = ConfigFactory.load().getString("helloscala.3des.key")
+  private val key = ConfigFactory.load().getString("hellocode.3des.key")
   private val TRIPLE_DES_TRANSFORMATION = "DESede/ECB/PKCS7Padding"
   private val ALGORITHM = "DESede"
   private val BOUNCY_CASTLE_PROVIDER = "BC"

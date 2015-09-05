@@ -25,12 +25,12 @@ case class TaskSettings(duration: Duration, dailyTask: String) {
 
 object Settings {
   val schedule = {
-    val conf = ConfigFactory.load().getConfig("helloscala.schedule")
+    val conf = ConfigFactory.load().getConfig("hellocode.schedule")
     TaskSettings(conf.getDuration("duration"), conf.getString("daily-schedule"))
   }
 
   val cookieSettings = {
-    val conf = ConfigFactory.load().getConfig("helloscala.cookie")
+    val conf = ConfigFactory.load().getConfig("hellocode.cookie")
     CookieSettings(getString(conf, "domain"),
       getString(conf, "path").getOrElse("/"),
       getBoolean(conf, "httpOnly").getOrElse(false),
@@ -38,7 +38,7 @@ object Settings {
   }
 
   val fileUpload = {
-    val conf = ConfigFactory.load().getConfig("helloscala.file-upload")
+    val conf = ConfigFactory.load().getConfig("hellocode.file-upload")
     FileUploadSettings(getString(conf, "local-path").get, getString(conf, "host"), getString(conf, "context").getOrElse(""))
   }
 

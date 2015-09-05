@@ -2,6 +2,7 @@ var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 
 module.exports = {
     entry: {
+        todoapp: './src/todoapp/js/index.js',
         app: './src/app/js/app.js',
         sign: './src/app/js/sign.js'
     },

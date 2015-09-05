@@ -27,7 +27,7 @@ object Build extends Build {
     .settings(basicSettings: _*)
     .settings(
       description := "hellocode",
-      //      TwirlKeys.templateImports ++= Seq("club.hellocode.site.data.model._", "club.hellocode.site.data.domain"),
+      TwirlKeys.templateImports ++= Seq("club.hellocode.site.data.domain", "club.hellocode.site.common.enums._" /*, "club.hellocode.site.data.model._"*/),
       RoutesKeys.routesGenerator := InjectedRoutesGenerator,
       libraryDependencies ++= (
         __compile(cache) ++

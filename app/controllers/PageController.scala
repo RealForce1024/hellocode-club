@@ -19,4 +19,7 @@ class PageController extends Controller {
     Ok(views.html.auth.index())
   }
 
+  def todoapp() = Action {
+    Ok(views.html.todoapp())
+  }
 }
