@@ -3,9 +3,9 @@ import Router, {Route, RouteHandler, HistoryLocation} from 'react-router';
 import {Provider} from 'react-redux';
 
 import configureStore from './store/configureStore';
-import SignApp from './components/sign/signApp';
-import SignIn from './components/sign/signIn';
-import SignUp from './components/sign/signUp';
+import SignApp from './components/sign/SignApp';
+import SignIn from './components/sign/SignIn';
+import SignUp from './components/sign/SignUp';
 
 const store = configureStore();
 

@@ -7,14 +7,19 @@ GET         /assets/*file               @controllers.Assets.at(path="/public", f
 
 # Home page
 GET         /                           @controllers.PageController.index()
+GET         /auth/*path                 @controllers.PageController.sign(path)
+GET         /app                        @controllers.PageController.appSingle()
+GET         /app/*path                  @controllers.PageController.app(path)
 GET         /todoapp                    @controllers.PageController.todoapp()
-GET         /auth/*file                 @controllers.PageController.sign(file)
+GET         /redditapp                  @controllers.PageController.redditapp()
 
 # API
 GET         /api/auth/captcha           @controllers.api.Auths.createCaptcha()
 POST        /api/auth/signup            @controllers.api.Auths.signUp()
 POST        /api/auth/signin            @controllers.api.Auths.signIn()
 POST        /api/auth/signout           @controllers.api.Auths.signOut()
+
+GET         /api/user                   @controllers.api.Users.getUser()
 
 #######################################################################
 # 社交账号

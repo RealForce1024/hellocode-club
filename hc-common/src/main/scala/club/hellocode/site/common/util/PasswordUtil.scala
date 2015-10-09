@@ -1,7 +1,7 @@
 package club.hellocode.site.common.util
 
 import java.util.Base64
-import club.hellocode.site.common.HsConstant
+import club.hellocode.site.common.HcConstant
 import org.bouncycastle.crypto.PBEParametersGenerator
 import org.bouncycastle.crypto.digests.SHA512Digest
 import org.bouncycastle.crypto.generators.PKCS5S2ParametersGenerator
@@ -49,7 +49,7 @@ object PasswordUtil {
   }
 
   private def decode(input: String): Array[Byte] = {
-    Base64.getDecoder.decode(input.getBytes(HsConstant.UTF8))
+    Base64.getDecoder.decode(input.getBytes(HcConstant.UTF8))
   }
 
   private def extractSalt(input: String): String = {

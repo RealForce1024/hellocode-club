@@ -1,7 +1,7 @@
 package club.hellocode.site.common.util
 
 import java.net.URLEncoder
-import club.hellocode.site.common.{TripleDesUtils, HsConstant}
+import club.hellocode.site.common.{TripleDesUtils, HcConstant}
 import club.hellocode.site.common.exception.HcInternalException
 import com.typesafe.scalalogging.StrictLogging
 
@@ -44,6 +44,6 @@ class SecurityUtils extends StrictLogging {
     PasswordUtil.verify(clearText, hashText)
   }
 
-  def urlEncode(value: String): String = URLEncoder.encode(value, HsConstant.UTF8.name())
+  def urlEncode(value: String): String = URLEncoder.encode(value, HcConstant.UTF8.name())
 
 }

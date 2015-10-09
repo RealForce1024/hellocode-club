@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 import club.hellocode.site.common.exception.HcBadRequestException
 import club.hellocode.site.common.setting.Settings
 import org.apache.commons.codec.digest.DigestUtils
-import org.bson.types.ObjectId
+import reactivemongo.bson.BSONObjectID
 
 import scala.concurrent.duration.{Duration, FiniteDuration}
 
@@ -72,7 +72,7 @@ object Utils {
     (page - 1) * size
   }
 
-  def generateOid() = ObjectId.get
+  def generateOid() = BSONObjectID.generate
 
   def currentTimeSeconds() = System.currentTimeMillis() / 1000
 
@@ -113,14 +113,14 @@ object Utils {
   }
 
   def generatePassword(password: String): (Array[Byte], Array[Byte]) = {
-    val salt = Array.ofDim[Byte](HsConstant.SALT_SIZE)
+    val salt = Array.ofDim[Byte](HcConstant.SALT_SIZE)
     random.nextBytes(salt)
-    val digestPassword = DigestUtils.sha256(password.getBytes(HsConstant.UTF8) ++ salt)
+    val digestPassword = DigestUtils.sha256(password.getBytes(HcConstant.UTF8) ++ salt)
     (salt, digestPassword)
   }
 
   def matchPassword(password: String, salt: Array[Byte], digestPassword: Array[Byte]): Boolean = {
-    java.util.Arrays.equals(DigestUtils.sha256(password.getBytes(HsConstant.UTF8) ++ salt), digestPassword)
+    java.util.Arrays.equals(DigestUtils.sha256(password.getBytes(HcConstant.UTF8) ++ salt), digestPassword)
   }
 
 }

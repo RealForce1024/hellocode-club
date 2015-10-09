@@ -1,64 +1,66 @@
 import Http from 'superagent';
+import {interceptor} from './interceptor';
 
-export const DO_SIGNIN = 'DO_SIGNIN';
-export const DO_SIGNUP = 'DO_SIGNUP';
-export const USER_INFO = 'USER_INFO';
+export const SIGN_IN = 'SIGN_IN';
+export const SIGN_UP = 'SIGN_UP';
+export const GET_USER = 'GET_USER';
 
-function returnSignIn(data) {
+function loadSignIn(data) {
+    console.log(data);
     return {
-        type: DO_SIGNIN,
+        type: SIGN_IN,
         data: data
     };
 }
 
-function returnSignUp(data) {
+function loadSignUp(data) {
     return {
-        type: DO_SIGNUP,
+        type: SIGN_UP,
         data: data
     };
 }
 
-function returnUser(data) {
+function loadUser(data) {
     return {
-        type: USER_INFO,
+        type: GET_USER,
         data: data
     };
 }
 
-export function signIn(params) {
+export function signIn(payload) {
     return dispatch => {
-        Http.post('/api/auth/signin')
-            .send(params)
-            .end((err, resp) => {
-                dispatch(returnSignIn(resp.body));
+        return Http.post('/api/auth/signin')
+            .send(payload)
+            .end(function (err, resp) {
+                dispatch(loadSignIn(resp.body));
             });
     };
 }
 
-export function signUp(params) {
+export function signUp(payload) {
     return dispatch => {
-        Http.post('/api/auth/signup')
-            .send(params)
+        return Http.post('/api/auth/signup')
+            .send(payload)
             .end((err, resp) => {
-                dispatch(returnSignUp(resp.body));
-            })
+                dispatch(loadSignUp(resp.body))
+            });
     }
 }
 
 export function signOut() {
     return dispatch => {
-        Http.del('/api/auth/signout')
+        return Http.del('/api/auth/signout')
             .end((err, resp) => {
-                window.location.href = '/auth/signin';
+                window.location.href = '/app';
             });
     };
 }
 
 export function getUser() {
     return dispatch => {
-        Http.post('/api/user')
+        return Http.get('/api/user')
             .end((err, resp) => {
-                dispatch(returnUser(resp.body));
+                interceptor(resp, () => dispatch(loadUser(resp.body)));
             });
     };
 }

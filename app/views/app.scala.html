@@ -1,4 +1,9 @@
-@()
-@_layout("首页") {
+@head = {
+}
+@foot = {
+    <script src="/assets/app/js/common.js"></script>
+    <script src="/assets/app/js/app.js"></script>
+}
+@_layout("首页", head, foot) {
     <h1>Helloscala.com</h1>
 }

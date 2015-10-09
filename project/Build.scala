@@ -22,8 +22,8 @@ object Build extends Build {
   lazy val hellocode = Project("hellocode", file("."))
     .enablePlugins(PlayScala)
     .enablePlugins(ApiMappings)
-    .aggregate(hcPlatform, hcCommon)
-    .dependsOn(hcPlatform, hcCommon)
+    .aggregate(hcPlatform, hcData, hcCommon)
+    .dependsOn(hcPlatform, hcData, hcCommon)
     .settings(basicSettings: _*)
     .settings(
       description := "hellocode",
@@ -43,18 +43,32 @@ object Build extends Build {
   ///////////////////////////////////////////////////////////////
   lazy val hcPlatform = Project("hc-platform", file("hc-platform"))
     .enablePlugins(ApiMappings)
-    .dependsOn(hcCommon)
+    .dependsOn(hcData, hcCommon)
     .settings(basicSettings: _*)
     .settings(
       description := "hc-platform",
       libraryDependencies ++= (
         __provided(_play) ++
+          __provided(_scalaLogging) ++
+          __compile(_patchca) ++
+          __compile(_akkaActor) ++
+          __compile(_akkaSlf4j)))
+
+  lazy val hcData = Project("hc-data", file("hc-data"))
+    .enablePlugins(ApiMappings)
+    .dependsOn(hcCommon)
+    .settings(basicSettings: _*)
+    .settings(
+      description := "hc-data",
+      libraryDependencies ++= (
+        __provided(_playJson) ++
+          __provided(_scalaLogging) ++
+          __provided(_guice) ++
+          __compile(_reactivemongo) ++
           __compile(_slick) ++
           __compile(_hikariCP) ++
           __compile(_slickPg) ++
-          __compile(_postgresql) ++
-          __compile(_patchca) ++
-          __compile(_akkaActor)))
+          __compile(_postgresql)))
 
   lazy val hcCommon = Project("hc-common", file("hc-common"))
     .enablePlugins(ApiMappings)
@@ -62,10 +76,10 @@ object Build extends Build {
     .settings(
       description := "hc-common",
       libraryDependencies ++= (
-        __compile(_bson) ++
-          __compile(_commonsLang3) ++
+        __compile(_commonsLang3) ++
           __compile(_bouncycastle) ++
           __compile(_commonsCodec) ++
+          __provided(_reactivemongo) ++
           __provided(_playJson) ++
           __provided(_commonsEmail) ++
           __provided(_scalaLogging) ++

@@ -14,6 +14,7 @@ import scala.concurrent.{ExecutionContext, Future}
  */
 @Singleton
 class UserService @Inject()(userRepo: UserRepo)(implicit ec: ExecutionContext) {
+
   def findList(page: Int, size: Int): Future[Seq[User]] =
     userRepo.findList(page, size)
 

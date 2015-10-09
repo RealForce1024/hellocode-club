@@ -15,11 +15,21 @@ class PageController extends Controller {
     Ok(views.html.index())
   }
 
+  def appSingle = app("")
+
+  def app(path: String) = Action {
+    Ok(views.html.app())
+  }
+
   def sign(path: String) = Action {
     Ok(views.html.auth.index())
   }
 
   def todoapp() = Action {
     Ok(views.html.todoapp())
+  }
+
+  def redditapp() = Action {
+    Ok(views.html.redditapp())
   }
 }

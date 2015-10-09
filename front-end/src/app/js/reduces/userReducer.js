@@ -1,14 +1,16 @@
 import Immutable from 'immutable';
 
-import {DO_SIGNIN, USER_INFO} from '../actions/userActions';
+import {SIGN_IN, SIGN_UP, GET_USER} from '../actions/userActions';
 
-export default function (state = {}, action = {}) {
+export default function (state = Immutable.fromJS({}), action = {}) {
     switch (action.type) {
-        case DO_SIGNIN:
+        case SIGN_IN:
             return Immutable.fromJS(action.data);
-        case USER_INFO:
+        case SIGN_UP:
+            return Immutable.fromJS(action.data);
+        case GET_USER :
             return Immutable.fromJS(action.data);
         default:
-            return Immutable.fromJS(state);
+            return state;
     }
 }

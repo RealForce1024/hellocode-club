@@ -1,6 +1,8 @@
 package utils
 
-import play.api.http.HttpErrorHandler
+import play.api.Logger
+import play.api.http.{Status, HttpErrorHandler}
+import play.api.libs.json.Json
 import play.api.mvc.{RequestHeader, Result, Results}
 
 import scala.concurrent.Future
@@ -11,10 +13,13 @@ import scala.concurrent.Future
  */
 class HelloErrorHandler extends HttpErrorHandler {
   override def onClientError(request: RequestHeader, statusCode: Int, message: String): Future[Result] = {
-    Future.successful(Results.Status(statusCode)("A client error occurred: " + message))
+    Logger.logger.error(s"[onClientError] [$request] $statusCode -> $message")
+    Future.successful(Results.Status(statusCode)(Json.obj("code" -> statusCode, "message" -> message)))
   }
 
   override def onServerError(request: RequestHeader, exception: Throwable): Future[Result] = {
-    Future.successful(Results.InternalServerError("A server error occurred: " + exception.getMessage))
+    Logger.logger.error(s"[onServerError] [$request] $exception", exception)
+    Future.successful(Results.InternalServerError(
+      Json.obj("code" -> Status.INTERNAL_SERVER_ERROR, "message" -> exception.getLocalizedMessage)))
   }
 }
